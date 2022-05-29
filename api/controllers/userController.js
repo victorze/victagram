@@ -35,7 +35,7 @@ const login = async (req, res) => {
 
 const show = async (req, res) => {
   const { username } = req.params
-  const user = await User.findOne({ username })
+  const user = await User.findOne({ username }).select(['-hash', '-salt'])
 
   if (!user) {
     throw new UserDoesNotExistError(`The user with username '${username}' does not exist`)
