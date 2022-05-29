@@ -2,6 +2,8 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 
+const { notFound, productionErrors } = require('./handlers/errors')
+
 const app = express()
 
 mongoose.connect(process.env.MONGODB_URI)
@@ -19,6 +21,9 @@ app.get('/', (req, res) => {
 })
 
 app.use(require('./routes'))
+
+app.use(notFound)
+app.use(productionErrors)
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
