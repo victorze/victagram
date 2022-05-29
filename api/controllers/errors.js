@@ -16,7 +16,17 @@ class BadCredentialsError extends Error {
   }
 }
 
+class UserDoesNotExistError extends Error {
+  constructor(message) {
+    super(message)
+    this.message = message || 'The user does not exist'
+    this.status = 404
+    this.name = 'UserDoesNotExist'
+  }
+}
+
 module.exports = {
   UserAlreadyExistsError,
   BadCredentialsError,
+  UserDoesNotExistError,
 }

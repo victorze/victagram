@@ -12,7 +12,7 @@ const productionErrors = (err, req, res, next) => {
 }
 
 module.exports = {
+  catchErrors,
   notFound,
   productionErrors,
-  catchErrors,
 }

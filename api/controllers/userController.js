@@ -1,5 +1,5 @@
 const { catchErrors } = require('../handlers/errors')
-const { UserAlreadyExistsError, BadCredentialsError } = require('./errors')
+const { UserAlreadyExistsError, BadCredentialsError, UserDoesNotExistError } = require('./errors')
 
 const { User } = require('../models')
 
@@ -33,7 +33,19 @@ const login = async (req, res) => {
   }
 }
 
+const show = async (req, res) => {
+  const { username } = req.params
+  const user = await User.findOne({ username })
+
+  if (!user) {
+    throw new UserDoesNotExistError(`The user with username '${username}' does not exist`)
+  }
+
+  return res.json(user)
+}
+
 module.exports = {
   register: catchErrors(register),
   login: catchErrors(login),
+  show: catchErrors(show),
 }

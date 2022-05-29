@@ -5,23 +5,25 @@ const jwt = require("jsonwebtoken")
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: true
+    required: true,
+    index: true,
   },
   email: {
     type: String,
-    required: true
+    required: true,
+    index: true,
   },
   fullName: {
     type: String,
-    required: true
+    required: true,
   },
   profileUrl: {
     type: String,
-    default: null
+    default: null,
   },
   bio: String,
   hash: String,
-  salt: String
+  salt: String,
 }, {
   timestamps: true,
 })
@@ -49,9 +51,9 @@ userSchema.methods.generateJwt = function() {
       _id: this._id,
       email: this.email,
       name: this.name,
-      exp: parseInt(expiry.getTime() / 1000, 10) // time in seconds
+      exp: parseInt(expiry.getTime() / 1000, 10), // time in seconds
     },
-    process.env.SECRET_JWT
+    process.env.SECRET_JWT,
   )
 }
 
