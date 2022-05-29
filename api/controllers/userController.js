@@ -1,4 +1,4 @@
-const { catchErrors } = require('../handlers/errors')
+const { catchErrors } = require('../handlers')
 const { UserAlreadyExistsError, BadCredentialsError, UserDoesNotExistError } = require('./errors')
 
 const { User } = require('../models')

@@ -35,6 +35,4 @@ if (process.env.NODE_ENV == 'test') {
   logger.silent = true
 }
 
-module.exports = {
-  logger
-}
+module.exports = logger

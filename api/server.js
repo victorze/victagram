@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 
-const { notFound, productionErrors } = require('./handlers/errors')
+const { notFound, productionErrors } = require('./handlers')
 
 const app = express()
 
