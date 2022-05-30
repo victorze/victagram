@@ -1,5 +1,5 @@
 const { logger } = require('../../handlers')
-const { BadRequestError } = require('../httpErrors')
+const { BadRequestError } = require('../../controllers/httpErrors')
 
 const validateImage = (req, res, next) => {
   const validMimeTypes = ['image/jpeg', 'image/jpg', 'image/png']

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { BadRequestError } = require('../httpErrors')
+const { BadRequestError } = require('../../controllers/httpErrors')
 
 const ObjectId = mongoose.Types.ObjectId
 

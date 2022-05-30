@@ -1,6 +1,6 @@
 const route = require('express').Router()
 const { userController } = require('../controllers')
-const { validateImage } = require('../controllers/validators/image')
+const { validateImage } = require('../handlers/validators')
 const { auth } = require('../handlers')
 
 route.post('/register', userController.register)
