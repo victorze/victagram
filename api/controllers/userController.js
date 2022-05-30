@@ -1,7 +1,6 @@
-const { catchErrors } = require('../handlers')
-const { UserAlreadyExistsError, BadCredentialsError, UserDoesNotExistError } = require('./errors')
-
 const { User } = require('../models')
+const { catchErrors, saveImage } = require('../handlers')
+const { UserAlreadyExistsError, BadCredentialsError, UserDoesNotExistError } = require('./errors')
 
 const register = async (req, res) => {
   const userExists = await User.findOne({ email: req.body.email })
@@ -18,6 +17,7 @@ const register = async (req, res) => {
 }
 
 const login = async (req, res) => {
+  console.log(req.app.locals.basePath)
   const { email, password } = req.body
   const user = await User.findOne({ email })
 
@@ -41,11 +41,17 @@ const show = async (req, res) => {
     throw new UserDoesNotExistError(`The user with username '${username}' does not exist`)
   }
 
-  return res.json(user)
+  res.json(user)
+}
+
+const upload = async (req, res) => {
+  imageUrl = await saveImage(req.body, req.fileName)
+  res.json({ url: imageUrl })
 }
 
 module.exports = {
   register: catchErrors(register),
   login: catchErrors(login),
   show: catchErrors(show),
+  upload: catchErrors(upload),
 }

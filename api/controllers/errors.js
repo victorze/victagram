@@ -34,9 +34,19 @@ class JWTAuthenticationError extends Error {
   }
 }
 
+class BadRequestError extends Error {
+  constructor(message) {
+    super(message)
+    this.message = message || 'Bad Request'
+    this.status = 400
+    this.name = 'BadRequest'
+  }
+}
+
 module.exports = {
   UserAlreadyExistsError,
   BadCredentialsError,
   UserDoesNotExistError,
   JWTAuthenticationError,
+  BadRequestError
 }

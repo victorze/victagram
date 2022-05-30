@@ -7,11 +7,13 @@ const { notFound, productionErrors, logger } = require('./handlers')
 
 const app = express()
 app.use(express.json())
+app.use(express.raw({ type: 'image/*', limit: '8mb' }))
 app.use(morgan('short', {
   stream: {
     write: message => logger.info(message.trim())
   }
 }))
+app.use(express.static('public'));
 
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected successfully to mongodb server'))
@@ -20,9 +22,9 @@ mongoose.connect(process.env.MONGODB_URI)
     process.exit(1)
   })
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
   console.log('home')
-  res.end('home')
+  res.send('home')
 })
 
 app.use(require('./routes'))
