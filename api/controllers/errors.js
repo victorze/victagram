@@ -25,8 +25,18 @@ class UserDoesNotExistError extends Error {
   }
 }
 
+class JWTAuthenticationError extends Error {
+  constructor(message) {
+    super(message)
+    this.message = message || 'Unauthorized'
+    this.status = 401
+    this.name = 'JWTAuthenticationError'
+  }
+}
+
 module.exports = {
   UserAlreadyExistsError,
   BadCredentialsError,
   UserDoesNotExistError,
+  JWTAuthenticationError,
 }
