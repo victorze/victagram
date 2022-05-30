@@ -25,9 +25,15 @@ const userPosts = async (req, res) => {
   res.json(posts)
 }
 
+const index = async (req, res) => {
+  const posts = await Post.find().limit(20).sort('-createdAt')
+  res.json(posts)
+}
+
 module.exports = {
   store: catchErrors(store),
   upload: catchErrors(upload),
   show: catchErrors(show),
   userPosts: catchErrors(userPosts),
+  index: catchErrors(index),
 }
