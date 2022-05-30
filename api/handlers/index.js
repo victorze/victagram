@@ -1,6 +1,6 @@
 const { catchErrors, notFound, productionErrors } = require('./errors')
 const { logger } = require('./logger')
-const { auth } = require('./authentication')
+const { auth } = require('./auth')
 
 module.exports = {
   catchErrors,
