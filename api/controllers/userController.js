@@ -13,6 +13,7 @@ const register = async (req, res) => {
     user.setPassword(req.body.password)
     await user.save()
     const token = user.generateJwt()
+    logger.info('Nuevo usuario registrado %s', user)
     res.status(201).json({ token })
   }
 }

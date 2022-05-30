@@ -1,3 +1,4 @@
+const { logger } = require('../../handlers')
 const { BadRequestError } = require('../httpErrors')
 
 const validateImage = (req, res, next) => {
@@ -5,6 +6,7 @@ const validateImage = (req, res, next) => {
   const contentType = req.header('content-type')
 
   if (!validMimeTypes.includes(contentType)) {
+    logger.warn('La extensión de la imagen debe ser jpeg, jpg o png (username: %s)', req.user.username)
     throw new BadRequestError('La extensión de la imagen debe ser jpeg, jpg o png')
   }
 
