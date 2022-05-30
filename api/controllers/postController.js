@@ -15,7 +15,13 @@ const upload = async (req, res) => {
   res.json({ url: imageUrl })
 }
 
+const show = async (req, res) => {
+  const post = await Post.findById(req.params.id)
+  res.json(post)
+}
+
 module.exports = {
   store: catchErrors(store),
   upload: catchErrors(upload),
+  show: catchErrors(show),
 }
