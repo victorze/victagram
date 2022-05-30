@@ -1,12 +1,13 @@
 const { User } = require('../models')
-const { catchErrors, saveImage } = require('../handlers')
+const { catchErrors, saveImage, logger } = require('../handlers')
 const { ConflictError, BadRequestError, NotFoundError } = require('./httpErrors')
 
 const register = async (req, res) => {
   const userExists = await User.findOne({ email: req.body.email })
 
   if (userExists) {
-    throw new ConflictError(`Ya existe un usuario con el email ${req.body.email}`)
+    logger.warn(`Ya existe un usuario con email ${req.body.email}`)
+    throw new ConflictError(`Ya existe un usuario con email ${req.body.email}`)
   } else {
     const user = new User(req.body)
     user.setPassword(req.body.password)
@@ -22,14 +23,16 @@ const login = async (req, res) => {
   const user = await User.findOne({ email })
 
   if (!user) {
-    throw new BadRequestError(`El usuario con el email ${email} no existe`)
+    logger.warn(`No existe un usuario con email ${email}`)
+    throw new BadRequestError(`No existe un usuario con email ${email}`)
   }
 
   if (user.validPassword(password)) {
     const token = user.generateJwt()
     res.json({ token })
   } else {
-    throw new BadRequestError('Las credenciales proporcionadas son incorrectas')
+    logger.warn(`Las credenciales son incorrectas (${email})`)
+    throw new BadRequestError('Las credenciales son incorrectas')
   }
 }
 
@@ -38,7 +41,8 @@ const show = async (req, res) => {
   const user = await User.findOne({ username }).select(['-hash', '-salt'])
 
   if (!user) {
-    throw new NotFoundError(`El usuario con username '${username}' no existe`)
+    logger.info(`No existe un usuario con username '${username}'`)
+    throw new NotFoundError(`No existe un usuario con username '${username}'`)
   }
 
   res.json(user)
@@ -46,6 +50,7 @@ const show = async (req, res) => {
 
 const upload = async (req, res) => {
   imageUrl = await saveImage(req.body, req.fileName)
+  logger.info(`El usuario '${req.user.username}' ha actualizado su imagen de perfil ${imageUrl}`)
   res.status(201).json({ url: imageUrl })
 }
 
