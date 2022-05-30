@@ -20,8 +20,14 @@ const show = async (req, res) => {
   res.json(post)
 }
 
+const userPosts = async (req, res) => {
+  const posts = await Post.find({ user: req.params.id })
+  res.json(posts)
+}
+
 module.exports = {
   store: catchErrors(store),
   upload: catchErrors(upload),
   show: catchErrors(show),
+  userPosts: catchErrors(userPosts),
 }
