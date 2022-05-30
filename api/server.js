@@ -13,7 +13,7 @@ app.use(morgan('short', {
     write: message => logger.info(message.trim())
   }
 }))
-app.use(express.static('public'));
+app.use(express.static('public'))
 
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected successfully to mongodb server'))

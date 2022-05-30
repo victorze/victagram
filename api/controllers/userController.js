@@ -46,7 +46,7 @@ const show = async (req, res) => {
 
 const upload = async (req, res) => {
   imageUrl = await saveImage(req.body, req.fileName)
-  res.json({ url: imageUrl })
+  res.status(201).json({ url: imageUrl })
 }
 
 module.exports = {
