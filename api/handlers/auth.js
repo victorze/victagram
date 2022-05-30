@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const { User } = require('../models')
-const { JWTAuthenticationError } = require('../controllers/errors')
+const { UnauthorizedError } = require('../controllers/httpErrors')
 const { catchErrors } = require('./errors')
 
 const auth = async (req, res, next) => {
@@ -15,13 +15,13 @@ const auth = async (req, res, next) => {
         req.user = user
         next()
       } else {
-        throw new JWTAuthenticationError()
+        throw new UnauthorizedError()
       }
     } catch (err) {
-      throw new JWTAuthenticationError()
+      throw new UnauthorizedError()
     }
   } else {
-    throw new JWTAuthenticationError()
+    throw new UnauthorizedError()
   }
 }
 

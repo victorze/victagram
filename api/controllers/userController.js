@@ -1,12 +1,12 @@
 const { User } = require('../models')
 const { catchErrors, saveImage } = require('../handlers')
-const { UserAlreadyExistsError, BadCredentialsError, UserDoesNotExistError } = require('./errors')
+const { ConflictError, BadRequestError, NotFoundError } = require('./httpErrors')
 
 const register = async (req, res) => {
   const userExists = await User.findOne({ email: req.body.email })
 
   if (userExists) {
-    throw new UserAlreadyExistsError()
+    throw new ConflictError(`Ya existe un usuario con el email ${req.body.email}`)
   } else {
     const user = new User(req.body)
     user.setPassword(req.body.password)
@@ -22,14 +22,14 @@ const login = async (req, res) => {
   const user = await User.findOne({ email })
 
   if (!user) {
-    throw new BadCredentialsError(`The user with email ${email} does not exist`)
+    throw new BadRequestError(`El usuario con el email ${email} no existe`)
   }
 
   if (user.validPassword(password)) {
     const token = user.generateJwt()
     res.json({ token })
   } else {
-    throw new BadCredentialsError()
+    throw new BadRequestError('Las credenciales proporcionadas son incorrectas')
   }
 }
 
@@ -38,7 +38,7 @@ const show = async (req, res) => {
   const user = await User.findOne({ username }).select(['-hash', '-salt'])
 
   if (!user) {
-    throw new UserDoesNotExistError(`The user with username '${username}' does not exist`)
+    throw new NotFoundError(`El usuario con username '${username}' no existe`)
   }
 
   res.json(user)

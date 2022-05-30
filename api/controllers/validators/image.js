@@ -1,4 +1,4 @@
-const { BadRequestError } = require('../errors')
+const { BadRequestError } = require('../httpErrors')
 
 const validateImage = (req, res, next) => {
   const validMimeTypes = ['image/jpeg', 'image/jpg', 'image/png']
