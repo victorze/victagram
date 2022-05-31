@@ -1,7 +1,7 @@
 const { validateImage } = require('./image')
-const { validateId } = require('./id')
+const { id } = require('./id')
 
 module.exports = {
   validateImage,
-  validateId,
+  id,
 }

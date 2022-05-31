@@ -3,16 +3,16 @@ const { BadRequestError } = require('../../controllers/httpErrors')
 
 const ObjectId = mongoose.Types.ObjectId
 
-const validateId = (req, res, next) => {
-  const { id } = req.params
+const id = (req, res, next) => {
+  const documentId = req.params.id
 
-  if (id && !ObjectId.isValid(id)) {
-    throw new BadRequestError(`El id [${id}] suministrado en la URL no es válido`)
+  if (documentId && !ObjectId.isValid(documentId)) {
+    throw new BadRequestError(`El id [${documentId}] suministrado en la URL no es válido`)
   }
 
   next()
 }
 
 module.exports = {
-  validateId,
+  id,
 }
