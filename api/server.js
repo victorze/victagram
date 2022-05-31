@@ -13,18 +13,13 @@ mongoose.connect(process.env.MONGODB_URI)
 
 const app = express()
 app.use(express.json())
-app.use(express.raw({ type: 'image/*', limit: '8mb' }))
+app.use(express.raw({ type: 'image/*', limit: '5mb' }))
 app.use(morgan('short', {
   stream: {
     write: message => logger.info(message.trim())
   }
 }))
 app.use(express.static('public'))
-
-app.get('/', async (req, res) => {
-  console.log('home')
-  res.send('home')
-})
 
 app.use(require('./routes'))
 
