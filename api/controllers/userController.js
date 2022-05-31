@@ -64,7 +64,6 @@ const upload = async (req, res) => {
   const user = req.user
   imageUrl = await saveImage(req.body, req.fileName)
   user.profileUrl = imageUrl
-
   await user.save()
   logger.info(`El usuario '${user.username}' ha actualizado su imagen de perfil ${imageUrl}`)
 

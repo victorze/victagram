@@ -3,8 +3,7 @@ const { catchErrors, saveImage, logger } = require('../handlers')
 
 const store = async (req, res) => {
   const { imageUrl, caption } = req.body
-  const post = new Post({ imageUrl, caption, user: req.user._id })
-  await post.save()
+  const post = await Post.create({ imageUrl, caption, user: req.user._id })
   logger.info('Nuevo post %s', post)
   res.status(201).json(post)
 }
