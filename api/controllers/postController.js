@@ -36,12 +36,12 @@ const show = async (req, res) => {
 }
 
 const userPosts = async (req, res) => {
-  const posts = await Post.find({ user: req.params.id })
+  const posts = await Post.find({ user: req.params.id }).limit(24).sort('-createdAt')
   res.json(posts)
 }
 
 const index = async (req, res) => {
-  const posts = await Post.find().limit(20).sort('-createdAt')
+  const posts = await Post.find().limit(24).sort('-createdAt')
   res.json(posts)
 }
 

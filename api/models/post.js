@@ -33,6 +33,12 @@ const postSchema = new mongoose.Schema({
   comments: [commentSchema],
 }, {
   timestamps: true,
+  toObject: { virtuals: true },
+  toJSON: { virtuals: true },
+})
+
+postSchema.virtual('commentCount').get(function() {
+  return this.comments.length
 })
 
 module.exports = mongoose.model('Post', postSchema)
