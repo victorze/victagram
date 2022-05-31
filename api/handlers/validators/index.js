@@ -1,7 +1,7 @@
-const { validateImage } = require('./image')
-const { id } = require('./id')
-const { validatePost } = require('./post')
-const { validateComment } = require('./comment')
+const { validateImage } = require('./imageValidator')
+const { id } = require('./idValidator')
+const { validatePost } = require('./postValidator')
+const { validateComment } = require('./commentValidator')
 
 module.exports = {
   validateImage,

@@ -1,4 +1,4 @@
-const { logger } = require('../../handlers')
+const { logger } = require('..')
 const { BadRequestError } = require('../../controllers/httpErrors')
 
 const validateImage = (req, res, next) => {
