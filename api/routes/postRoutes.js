@@ -1,9 +1,9 @@
 const route = require('express').Router()
 const { postController, commentController, likeController } = require('../controllers')
-const { validateImage, id } = require('../handlers/validators')
+const { validateImage, id, validatePost } = require('../handlers/validators')
 const { auth } = require('../handlers')
 
-route.post('/', auth, postController.store)
+route.post('/', [auth, validatePost], postController.store)
 route.post('/upload', [auth, validateImage], postController.upload)
 route.get('/feed', auth, postController.feed)
 route.get('/:id', [auth, id], postController.show)
