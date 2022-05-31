@@ -15,6 +15,16 @@ const commentSchema = new mongoose.Schema({
   timestamps: true,
 })
 
+const likeSchema = new mongoose.Schema({
+  user: {
+    type: ObjectId,
+    required: true,
+    ref: 'user',
+  }
+}, {
+  timestamps: true,
+})
+
 const postSchema = new mongoose.Schema({
   imageUrl: {
     type: String,
@@ -31,14 +41,19 @@ const postSchema = new mongoose.Schema({
     maxlength: 200,
   },
   comments: [commentSchema],
+  likes: [likeSchema],
 }, {
   timestamps: true,
   toObject: { virtuals: true },
   toJSON: { virtuals: true },
 })
 
-postSchema.virtual('commentCount').get(function() {
+postSchema.virtual('commentCount').get(function () {
   return this.comments.length
+})
+
+postSchema.virtual('likeCount').get(function () {
+  return this.likes.length
 })
 
 module.exports = mongoose.model('Post', postSchema)
