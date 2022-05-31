@@ -15,16 +15,6 @@ const commentSchema = new mongoose.Schema({
   timestamps: true,
 })
 
-const likeSchema = new mongoose.Schema({
-  user: {
-    type: ObjectId,
-    required: true,
-    ref: 'user',
-  }
-}, {
-  timestamps: true,
-})
-
 const postSchema = new mongoose.Schema({
   imageUrl: {
     type: String,
@@ -41,7 +31,7 @@ const postSchema = new mongoose.Schema({
     maxlength: 200,
   },
   comments: [commentSchema],
-  likes: [likeSchema],
+  likes: [ObjectId],
 }, {
   timestamps: true,
   toObject: { virtuals: true },

@@ -1,5 +1,5 @@
 const route = require('express').Router()
-const { postController, commentController } = require('../controllers')
+const { postController, commentController, likeController } = require('../controllers')
 const { validateImage, id } = require('../handlers/validators')
 const { auth } = require('../handlers')
 
@@ -11,5 +11,7 @@ route.get('/user/:id', [auth, id], postController.userPosts)
 route.get('/', auth, postController.index)
 
 route.post('/:id/comments', [auth, id], commentController.store)
+
+route.post('/:id/likes', [auth, id], likeController.like)
 
 module.exports = route
