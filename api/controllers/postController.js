@@ -1,4 +1,4 @@
-const { Post } = require('../models')
+const { Post, Friendship } = require('../models')
 const { catchErrors, saveImage, logger } = require('../handlers')
 
 const store = async (req, res) => {
@@ -15,6 +15,22 @@ const upload = async (req, res) => {
   res.json({ url: imageUrl })
 }
 
+const feed = async (req, res) => {
+  const searchBefore = req.query.date || new Date()
+  const following = await Friendship.find({ follower: req.user.id })
+  const followingIds = following.map((friend) => friend.user)
+
+  const posts = await Post.find({
+    user: followingIds,
+    createdAt: { $lt: searchBefore },
+  })
+    .populate('user', '_id username profileUrl')
+    .limit(3)
+    .sort('-createdAt')
+
+  res.json(posts)
+}
+
 const show = async (req, res) => {
   const post = await Post.findById(req.params.id)
   res.json(post)
@@ -26,6 +42,7 @@ const userPosts = async (req, res) => {
 }
 
 const index = async (req, res) => {
+  console.log(req.user)
   const posts = await Post.find().limit(20).sort('-createdAt')
   res.json(posts)
 }
@@ -33,6 +50,7 @@ const index = async (req, res) => {
 module.exports = {
   store: catchErrors(store),
   upload: catchErrors(upload),
+  feed: catchErrors(feed),
   show: catchErrors(show),
   userPosts: catchErrors(userPosts),
   index: catchErrors(index),
