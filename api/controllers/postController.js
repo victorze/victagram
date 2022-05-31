@@ -42,7 +42,6 @@ const userPosts = async (req, res) => {
 }
 
 const index = async (req, res) => {
-  console.log(req.user)
   const posts = await Post.find().limit(20).sort('-createdAt')
   res.json(posts)
 }

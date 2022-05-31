@@ -11,8 +11,8 @@ const register = async (req, res) => {
   } else {
     const user = new User(req.body)
     user.setPassword(req.body.password)
-
     await user.save()
+
     const token = user.generateJwt()
     logger.info('Nuevo usuario registrado %s', user)
 
@@ -21,7 +21,6 @@ const register = async (req, res) => {
 }
 
 const login = async (req, res) => {
-  console.log(req.app.locals.basePath)
   const { email, password } = req.body
   const user = await User.findOne({ email })
 
@@ -34,7 +33,7 @@ const login = async (req, res) => {
     const token = user.generateJwt()
     res.json({ token })
   } else {
-    logger.warn(`Las credenciales son incorrectas (${email})`)
+    logger.warn(`Las credenciales son incorrectas (email: ${email})`)
     throw new BadRequestError('Las credenciales son incorrectas')
   }
 }
