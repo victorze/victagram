@@ -13,5 +13,6 @@ route.get('/', auth, postController.index)
 route.post('/:id/comments', [auth, id], commentController.store)
 
 route.post('/:id/likes', [auth, id], likeController.like)
+route.delete('/:id/likes', [auth, id], likeController.unlike)
 
 module.exports = route
