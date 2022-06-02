@@ -53,6 +53,13 @@ function autopopulate(next) {
 userSchema.pre('find', autopopulate)
 userSchema.pre('findOne', autopopulate)
 
+userSchema.methods.secure = function (password) {
+  const user = this.toObject()
+  delete user.hash
+  delete user.salt
+  return user
+}
+
 userSchema.methods.setPassword = function (password) {
   this.salt = crypto.randomBytes(16).toString("hex")
   this.hash = crypto
