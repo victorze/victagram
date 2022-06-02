@@ -7,7 +7,7 @@ export const Signup = () => {
       <Img src={signupImage}></Img>
       <FormContainer>
         <Title>
-          Clontagram
+          Victagram
         </Title>
         <Info>
           Regístrate para ver fotos de tus amigos

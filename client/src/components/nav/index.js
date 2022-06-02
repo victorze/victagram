@@ -5,7 +5,7 @@ export const Nav = () => {
     <NavContainer>
       <StyledNav>
         <Logo href="#">
-          Clontagram
+          Victagram
         </Logo>
       </StyledNav>
     </NavContainer>
