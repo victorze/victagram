@@ -3,4 +3,5 @@ export const theme = {
   backgroundColor: '#FAFAFA',
   textColor: '#262626',
   secondaryTextColor: '#8E8E8E',
+  blueColor: '#0095F6',
 }
