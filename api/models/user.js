@@ -26,7 +26,32 @@ const userSchema = new mongoose.Schema({
   salt: String,
 }, {
   timestamps: true,
+  toObject: { virtuals: true },
+  toJSON: { virtuals: true },
 })
+
+userSchema.virtual('followers', {
+  ref: 'Friendship',
+  localField: '_id',
+  foreignField: 'user',
+  count: true,
+})
+
+userSchema.virtual('following', {
+  ref: 'Friendship',
+  localField: '_id',
+  foreignField: 'follower',
+  count: true,
+})
+
+function autopopulate(next) {
+  this.populate('followers')
+  this.populate('following')
+  next()
+}
+
+userSchema.pre('find', autopopulate)
+userSchema.pre('findOne', autopopulate)
 
 userSchema.methods.setPassword = function (password) {
   this.salt = crypto.randomBytes(16).toString("hex")
