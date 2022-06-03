@@ -39,6 +39,11 @@ const login = async (req, res) => {
   }
 }
 
+const whoami = async (req, res) => {
+  console.log(req.body)
+  res.json(req.user.secure())
+}
+
 const explore = async (req, res) => {
   const following = await Friendship.find({ follower: req.user.id })
   const followingIds = following.map((friend) => friend.user)
@@ -74,6 +79,7 @@ const upload = async (req, res) => {
 module.exports = {
   signup: catchErrors(signup),
   login: catchErrors(login),
+  whoami: catchErrors(whoami),
   explore: catchErrors(explore),
   show: catchErrors(show),
   upload: catchErrors(upload),
