@@ -18,4 +18,15 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
+
+  @keyframes sk-bouncedelay {
+    0%,
+    80%,
+    to {
+      transform: scale(0);
+    }
+    40% {
+      transform: scale(1);
+    }
+  }
 `
