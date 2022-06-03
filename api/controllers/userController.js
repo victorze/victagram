@@ -2,7 +2,7 @@ const { User, Friendship } = require('../models')
 const { catchErrors, saveImage, logger } = require('../handlers')
 const { ConflictError, BadRequestError, NotFoundError } = require('./httpErrors')
 
-const register = async (req, res) => {
+const signup = async (req, res) => {
   const { email, username } = req.body
   const userExists = await User.findOne({$or: [{ email }, { username }]})
 
@@ -72,7 +72,7 @@ const upload = async (req, res) => {
 }
 
 module.exports = {
-  register: catchErrors(register),
+  signup: catchErrors(signup),
   login: catchErrors(login),
   explore: catchErrors(explore),
   show: catchErrors(show),

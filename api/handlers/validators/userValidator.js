@@ -1,6 +1,6 @@
 const { BadRequestError } = require("../../controllers/httpErrors")
 
-const validateRegister = (req, res, next) => {
+const validateSignup = (req, res, next) => {
   const { fullName, email, username, password } = req.body
 
   if (!fullName.trim()) {
@@ -34,5 +34,5 @@ const validateLogin = (req, res, next) => {
 
 module.exports = {
   validateLogin,
-  validateRegister,
+  validateSignup,
 }
