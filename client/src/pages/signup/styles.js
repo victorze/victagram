@@ -8,6 +8,9 @@ export const StyledSignup = styled.section`
 
 export const Img = styled.img`
   width: 50%;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `
 
 export const FormContainer = styled.div`
@@ -16,12 +19,14 @@ export const FormContainer = styled.div`
   padding: 4rem 2rem;
   background-color: #fff;
   text-align: center;
+  min-width: 22rem;
 `
 
 export const Form = styled.form`
 `
 
 export const Title = styled.h1`
+  margin-bottom: 1.5rem;
   font-size: 2.5rem;
 `
 
@@ -65,7 +70,7 @@ export const P = styled.p`
   margin-top: 3.5rem;
 `
 
-export const LinkLogin = styled.a`
+export const StyledLink = styled.a`
   color: ${props => props.theme.blueColor};
   text-decoration: none;
   &:active {

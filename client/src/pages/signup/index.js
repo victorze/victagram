@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { StyledSignup, FormContainer, Form, Img, Title, Info, Input, Button, P, LinkLogin } from './styles'
+import { StyledSignup, FormContainer, Form, Img, Title, Info, Input, Button, P, StyledLink } from './styles'
 import signupImage from '../../images/signup.png'
 
 export const Signup = () => {
@@ -98,7 +98,7 @@ export const Signup = () => {
         </Form>
 
         <P>
-          ¿Tienes una cuenta? <LinkLogin href="#">Log in</LinkLogin>
+          ¿Tienes una cuenta? <StyledLink href="#">Log in</StyledLink>
         </P>
       </FormContainer>
     </StyledSignup>

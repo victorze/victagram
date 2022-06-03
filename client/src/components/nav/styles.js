@@ -13,6 +13,7 @@ export const StyledNav = styled.nav`
 
 export const Logo = styled.a`
   display: inline-block;
+  margin-left: 1rem;
   color: ${props => props.theme.textColor};
   text-decoration: none;
   font-size: 1.5rem;
