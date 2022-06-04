@@ -3,8 +3,17 @@ import styled from 'styled-components'
 
 export const StyledSignup = styled.section`
   display: flex;
-  margin-top: 4rem;
+  margin: 6rem auto;
   justify-content: space-around;
+  max-width: 52.5rem;
+`
+
+export const StyledLogin = styled.section`
+  margin: 6rem auto;
+  width: 22rem;
+  border: 1px solid #DBDBDB;
+  padding: 4rem 2rem;
+  text-align: center;
 `
 
 export const Img = styled.img`

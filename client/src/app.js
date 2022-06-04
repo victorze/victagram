@@ -1,16 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Routes, Route, BrowserRouter } from 'react-router-dom'
-import styled, { ThemeProvider } from 'styled-components'
+import { Routes, Route } from 'react-router-dom'
 import { Loading } from './components/loading'
 import { Nav } from './components/nav'
+import { Login } from './pages/auth/login'
+import { Signup } from './pages/auth/signup'
+import { Main } from './pages/styles'
 import { setToken, getToken, deleteToken, request } from './helpers'
-import { Login } from './pages/login'
-import { Signup } from './pages/signup'
-
-const Main = styled.main`
-  max-width: 52.5rem;
-  margin: 0 auto;
-`
 
 export const App = () => {
   const [user, setUser] = useState(null)
@@ -29,13 +24,13 @@ export const App = () => {
   }, [])
 
   const login = async (credentials) => {
-    const { response, data } = await request.post('/api/users/login', credentials)
+    const { data } = await request.post('/api/users/login', credentials)
     setUser(data.user)
     setToken(data.token)
   }
 
   const signup = async (user) => {
-    const { response, data } = await request.post('/api/users/signup', user)
+    const { data } = await request.post('/api/users/signup', user)
     setUser(data.user)
     setToken(data.token)
   }
@@ -50,35 +45,31 @@ export const App = () => {
   }
 
   return (
-    <BrowserRouter>
-      {user
-        ? <ProtectedRoutes />
-        : <UnprotectedRoutes login={login} signup={signup} />}
-      <div>{JSON.stringify(user)}</div>
-    </BrowserRouter>
-  )
-}
-
-const ProtectedRoutes = () => {
-  return (
     <>
-      <Nav />
+      {user && <Nav />}
       <Main>
-        <Routes>
-          <Route path='*' element={<h1>Soy el feed</h1>} />
-        </Routes>
+        {user
+          ? <ProtectedRoutes />
+          : <UnprotectedRoutes login={login} signup={signup} />}
+        <div>{JSON.stringify(user)}</div>
       </Main>
     </>
   )
 }
 
+const ProtectedRoutes = () => {
+  return (
+    <Routes>
+      <Route path='*' element={<h1>Soy el feed</h1>} />
+    </Routes>
+  )
+}
+
 const UnprotectedRoutes = ({ login, signup }) => {
   return (
-    <Main>
-      <Routes>
-        <Route path='login' element={<Login login={login} />} />
-        <Route path='*' element={<Signup signup={signup} />} />
-      </Routes>
-    </Main>
+    <Routes>
+      <Route path='login' element={<Login login={login} />} />
+      <Route path='*' element={<Signup signup={signup} />} />
+    </Routes>
   )
 }

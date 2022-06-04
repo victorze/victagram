@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Form, Input, P, StyledLink, Title } from '../signup/styles'
+import { Button, Form, Input, P, StyledLink, Title } from './styles'
 import { StyledLogin } from './styles'
 
 export const Login = ({ login  }) => {
