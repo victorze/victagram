@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { StyledSignup, FormContainer, Form, Img, Title, Info, Input, Button, P, StyledLink } from './styles'
 import signupImage from '../../images/signup.png'
 
-export const Signup = () => {
+export const Signup = ({ signup }) => {
   const [user, setUser] = useState({
     fullName: '',
     bio: '',
@@ -22,17 +22,7 @@ export const Signup = () => {
     e.preventDefault()
 
     try {
-      const options = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(user),
-      }
-
-      const res = await fetch('/api/users/register', options)
-      console.log(res)
-      console.log(await res.json())
+      signup(user)
     } catch (error) {
       console.log(error)
     }
@@ -98,7 +88,7 @@ export const Signup = () => {
         </Form>
 
         <P>
-          ¿Tienes una cuenta? <StyledLink href="#">Log in</StyledLink>
+          ¿Tienes una cuenta? <StyledLink to="/login">Log in</StyledLink>
         </P>
       </FormContainer>
     </StyledSignup>

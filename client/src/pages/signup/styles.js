@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 export const StyledSignup = styled.section`
   display: flex;
@@ -70,7 +71,7 @@ export const P = styled.p`
   margin-top: 3.5rem;
 `
 
-export const StyledLink = styled.a`
+export const StyledLink = styled(Link)`
   color: ${props => props.theme.blueColor};
   text-decoration: none;
   &:active {

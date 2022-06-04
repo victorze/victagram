@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Button, Form, Input, P, StyledLink, Title } from '../signup/styles'
 import { StyledLogin } from './styles'
 
-export const Login = () => {
+export const Login = ({ login  }) => {
   const [credentials, setCredentials] = useState({
     email: '',
     password: '',
@@ -19,19 +19,15 @@ export const Login = () => {
     e.preventDefault()
 
     try {
-      const options = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentials),
-      }
-
-      const res = await fetch('/api/users/login', options)
-      console.log(res)
-      console.log(await res.json())
+      await login(credentials)
     } catch (error) {
-      console.log(error)
+      if (error.response) {
+        console.log(error.response)
+        console.log(error.data)
+      } else {
+        console.log('Error de servidor')
+        console.log(error)
+      }
     }
   }
 
@@ -65,7 +61,7 @@ export const Login = () => {
       </Form>
 
       <P>
-        ¿No tienes una cuenta? <StyledLink href="#">Sign up</StyledLink>
+        ¿No tienes una cuenta? <StyledLink to="/signup">Sign up</StyledLink>
       </P>
     </StyledLogin>
   )
