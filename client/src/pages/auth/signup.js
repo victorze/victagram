@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { StyledSignup, FormContainer, Form, Img, Title, Info, Input, Button, P, StyledLink } from './styles'
 import signupImage from '../../images/signup.png'
 
-export const Signup = ({ signup }) => {
+export const Signup = ({ signup, showError }) => {
   const [user, setUser] = useState({
     fullName: '',
     bio: '',
@@ -18,14 +18,10 @@ export const Signup = ({ signup }) => {
     })
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-
-    try {
-      signup(user)
-    } catch (error) {
-      console.log(error)
-    }
+    signup(user)
+      .catch((error) => error.data && showError(error.data.message))
   }
 
   return (

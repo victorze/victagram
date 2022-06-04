@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { Main } from './pages/styles'
 import { Loading } from './components/loading'
 import { Nav } from './components/nav'
+import { Error } from './components/error'
 import { Login } from './pages/auth/login'
 import { Signup } from './pages/auth/signup'
-import { Main } from './pages/styles'
 import { setToken, getToken, deleteToken, request } from './helpers'
 
 export const App = () => {
   const [user, setUser] = useState(null)
   const [loadingUser, setLoadingUser] = useState(true)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
     (async () => {
@@ -40,6 +42,14 @@ export const App = () => {
     deleteToken()
   }
 
+  const showError = (message) => {
+    setErrorMessage(message)
+  }
+
+  const hideError = () => {
+    setErrorMessage(null)
+  }
+
   if (loadingUser) {
     return <Loading />
   }
@@ -48,10 +58,10 @@ export const App = () => {
     <>
       {user && <Nav />}
       <Main>
+        <Error message={errorMessage} hideError={hideError} />
         {user
           ? <ProtectedRoutes />
-          : <UnprotectedRoutes login={login} signup={signup} />}
-        <div>{JSON.stringify(user)}</div>
+          : <UnprotectedRoutes login={login} signup={signup} showError={showError} />}
       </Main>
     </>
   )
@@ -65,11 +75,11 @@ const ProtectedRoutes = () => {
   )
 }
 
-const UnprotectedRoutes = ({ login, signup }) => {
+const UnprotectedRoutes = ({ login, signup, showError }) => {
   return (
     <Routes>
-      <Route path='login' element={<Login login={login} />} />
-      <Route path='*' element={<Signup signup={signup} />} />
+      <Route path='login' element={<Login login={login} showError={showError} />} />
+      <Route path='*' element={<Signup signup={signup} showError={showError} />} />
     </Routes>
   )
 }

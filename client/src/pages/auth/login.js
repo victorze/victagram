@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Button, Form, Input, P, StyledLink, Title } from './styles'
 import { StyledLogin } from './styles'
 
-export const Login = ({ login  }) => {
+export const Login = ({ login, showError }) => {
   const [credentials, setCredentials] = useState({
     email: '',
     password: '',
@@ -15,20 +15,10 @@ export const Login = ({ login  }) => {
     })
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-
-    try {
-      await login(credentials)
-    } catch (error) {
-      if (error.response) {
-        console.log(error.response)
-        console.log(error.data)
-      } else {
-        console.log('Error de servidor')
-        console.log(error)
-      }
-    }
+    login(credentials)
+      .catch((error) => error.data && showError(error.data.message))
   }
 
   return (
