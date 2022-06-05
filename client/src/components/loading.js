@@ -16,7 +16,7 @@ export const StyledLoading = styled.div`
   align-items: center;
   margin: 0 auto;
   width: 70px;
-  height: 100vh;
+  height: calc(100vh - 3.8rem);
 `
 
 export const Dot = styled.div`
