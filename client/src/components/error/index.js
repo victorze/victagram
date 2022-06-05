@@ -1,4 +1,4 @@
-import { StyledError, Message, Close } from "./styles"
+import { StyledError, Close } from "./styles"
 
 export const Error = ({ message, hideError }) => {
   if (!message) {
