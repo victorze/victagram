@@ -27,11 +27,14 @@ const feed = async (req, res) => {
     .limit(3)
     .sort('-createdAt')
 
+  posts.forEach((post) => post.hasLiked = post.likes.includes(req.user.id))
+
   res.json(posts)
 }
 
 const show = async (req, res) => {
   const post = await Post.findById(req.params.id)
+  post.hasLiked = post.likes.includes(req.user.id)
   res.json(post)
 }
 

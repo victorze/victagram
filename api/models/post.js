@@ -46,4 +46,12 @@ postSchema.virtual('likeCount').get(function () {
   return this.likes.length
 })
 
+postSchema.virtual('hasLiked')
+  .get(function() {
+    return this._hasLiked || false
+  })
+  .set(function(value) {
+    this._hasLiked = value
+  })
+
 module.exports = mongoose.model('Post', postSchema)
