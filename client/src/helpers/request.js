@@ -4,7 +4,7 @@ const createOptions = (method = 'GET', body = null) => {
   const options = {
     method,
     headers: {
-      'Content-Type': 'application/json',
+      'content-type': 'application/json',
     },
   }
 
@@ -12,7 +12,11 @@ const createOptions = (method = 'GET', body = null) => {
   if (token) {
     options.headers.authorization = `bearer ${token}`
   }
-  if (body) {
+
+  if (body instanceof File) {
+    options.headers['content-type'] = body.type
+    options.body = body
+  } else if (body) {
     options.body = JSON.stringify(body)
   }
 
