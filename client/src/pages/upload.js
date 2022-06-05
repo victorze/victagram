@@ -21,8 +21,8 @@ export const Upload = ({ showError }) => {
       setUploadingImage(false)
       setImageUrl(data.url)
     } catch (error) {
-      if (error.data) {
-        showError(error.data.message)
+      if (error.response) {
+        showError(error.response.data.message)
       }
       setUploadingImage(false)
     }
@@ -49,8 +49,8 @@ export const Upload = ({ showError }) => {
       setSendingPost(false)
       navigate('/')
     } catch (error) {
-      if (error.data) {
-        showError(error.data.message)
+      if (error.response) {
+        showError(error.response.data.message)
       }
       setSendingPost(false)
     }

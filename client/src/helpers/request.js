@@ -2,24 +2,14 @@ import { getToken } from './auth'
 
 const get = async (url) => {
   const response = await fetch(url, createOptions())
-  const data = await response.json()
-
-  if (!response.ok) {
-    throwError(response, data)
-  }
-
-  return { response, data }
+  response.data = await response.json()
+  return buildResponse(response)
 }
 
 const post = async (url, body) => {
   const response = await fetch(url, createOptions('POST', body))
-  const data = await response.json()
-
-  if (!response.ok) {
-    throwError(response, data)
-  }
-
-  return { response, data }
+  response.data = await response.json()
+  return buildResponse(response)
 }
 
 const createOptions = (method = 'GET', body = null) => {
@@ -45,11 +35,14 @@ const createOptions = (method = 'GET', body = null) => {
   return options
 }
 
-const throwError = (response, data) => {
-  const error = new Error('The response was not successful')
-  error.response = response
-  error.data = data
-  throw error
+const buildResponse = (response) => {
+  if (!response.ok) {
+    const error = new Error('The response was not successful')
+    error.response = response
+    throw error
+  }
+
+  return response
 }
 
 export const request = {

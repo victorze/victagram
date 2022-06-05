@@ -18,7 +18,7 @@ export const Login = ({ login, showError }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     login(credentials)
-      .catch((error) => error.data && showError(error.data.message))
+      .catch((error) => error.response && showError(error.response.data.message))
   }
 
   return (

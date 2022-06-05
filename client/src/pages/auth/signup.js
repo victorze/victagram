@@ -21,7 +21,7 @@ export const Signup = ({ signup, showError }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     signup(user)
-      .catch((error) => error.data && showError(error.data.message))
+      .catch((error) => error.response && showError(error.response.data.message))
   }
 
   return (
