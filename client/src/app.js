@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { setToken, getToken, deleteToken, request } from './helpers'
 import { Loading } from './components/loading'
 import { Nav } from './components/nav'
 import { Error } from './components/error'
 import { Login } from './pages/auth/login'
 import { Signup } from './pages/auth/signup'
 import { Upload } from './pages/upload'
-import { setToken, getToken, deleteToken, request } from './helpers'
+import { Feed } from './pages/feed'
 
 export const App = () => {
   const [user, setUser] = useState(null)
@@ -14,15 +15,14 @@ export const App = () => {
   const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
-    (async () => {
-      if (!getToken()) {
-        return setLoadingUser(false)
-      }
+    if (!getToken()) {
+      return setLoadingUser(false)
+    }
 
-      const { data } = await request.get('/api/users/whoami')
-      setUser(data)
-      setLoadingUser(false)
-    })()
+    request.get('/api/users/whoami')
+      .then(({ data }) => setUser(data))
+      .catch(console.log)
+      .finally(() => setLoadingUser(false))
   }, [])
 
   const login = async (credentials) => {
@@ -71,6 +71,7 @@ const ProtectedRoutes = ({ showError }) => {
   return (
     <Routes>
       <Route path='upload' element={<Upload showError={showError} />} />
+      <Route path='/' element={<Feed showError={showError} />} />
       <Route path='*' element={<h1>Soy el feed</h1>} />
     </Routes>
   )

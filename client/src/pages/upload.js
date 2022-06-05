@@ -13,22 +13,17 @@ export const Upload = ({ showError }) => {
   const [sendingPost, setSendingPost] = useState(false)
   const navigate = useNavigate()
 
-  const handleUploadImage = async ({ target }) => {
-    try {
-      setUploadingImage(true)
-      const file = target.files[0]
-      const { data } = await request.post('/api/posts/upload', file)
-      setUploadingImage(false)
-      setImageUrl(data.url)
-    } catch (error) {
-      if (error.response) {
-        showError(error.response.data.message)
-      }
-      setUploadingImage(false)
-    }
+  const handleUploadImage = ({ target }) => {
+    const file = target.files[0]
+    setUploadingImage(true)
+
+    request.post('/api/posts/upload', file)
+      .then(({ data }) => setImageUrl(data.url))
+      .catch((error) => error.response && showError(error.response.data.message))
+      .finally(() => setUploadingImage(false))
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
 
     if (sendingPost) {
@@ -43,17 +38,12 @@ export const Upload = ({ showError }) => {
       return showError('Debe seleccionar una imagen')
     }
 
-    try {
-      setSendingPost(true)
-      await request.post('/api/posts', { imageUrl, caption })
-      setSendingPost(false)
-      navigate('/')
-    } catch (error) {
-      if (error.response) {
-        showError(error.response.data.message)
-      }
-      setSendingPost(false)
-    }
+    setSendingPost(true)
+
+    request.post('/api/posts', { imageUrl, caption })
+      .then(() => navigate('/'))
+      .catch((error) => error.response && showError(error.response.data.message))
+      .finally(() => setSendingPost(false))
   }
 
   return (
