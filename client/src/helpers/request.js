@@ -1,4 +1,26 @@
-import { getToken } from "./auth"
+import { getToken } from './auth'
+
+const get = async (url) => {
+  const response = await fetch(url, createOptions())
+  const data = await response.json()
+
+  if (!response.ok) {
+    throwError(response, data)
+  }
+
+  return { response, data }
+}
+
+const post = async (url, body) => {
+  const response = await fetch(url, createOptions('POST', body))
+  const data = await response.json()
+
+  if (!response.ok) {
+    throwError(response, data)
+  }
+
+  return { response, data }
+}
 
 const createOptions = (method = 'GET', body = null) => {
   const options = {
@@ -23,32 +45,11 @@ const createOptions = (method = 'GET', body = null) => {
   return options
 }
 
-const get = async (url) => {
-  const response = await fetch(url, createOptions())
-  const data = await response.json()
-
-  if (!response.ok) {
-    const error = new Error('The response was not successful')
-    error.response = response
-    error.data = data
-    throw error
-  }
-
-  return { response, data }
-}
-
-const post = async (url, body) => {
-  const response = await fetch(url, createOptions('POST', body))
-  const data = await response.json()
-
-  if (!response.ok) {
-    const error = new Error('The response was not successful')
-    error.response = response
-    error.data = data
-    throw error
-  }
-
-  return { response, data }
+const throwError = (response, data) => {
+  const error = new Error('The response was not successful')
+  error.response = response
+  error.data = data
+  throw error
 }
 
 export const request = {
