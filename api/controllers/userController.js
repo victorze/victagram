@@ -40,7 +40,6 @@ const login = async (req, res) => {
 }
 
 const whoami = async (req, res) => {
-  console.log(req.body)
   res.json(req.user.secure())
 }
 
