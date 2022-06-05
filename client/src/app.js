@@ -6,6 +6,7 @@ import { Nav } from './components/nav'
 import { Error } from './components/error'
 import { Login } from './pages/auth/login'
 import { Signup } from './pages/auth/signup'
+import { Upload } from './pages/upload'
 import { setToken, getToken, deleteToken, request } from './helpers'
 
 export const App = () => {
@@ -56,20 +57,21 @@ export const App = () => {
 
   return (
     <>
-      {user && <Nav />}
+      {user && <Nav user={user} />}
       <Main>
         <Error message={errorMessage} hideError={hideError} />
         {user
-          ? <ProtectedRoutes />
+          ? <ProtectedRoutes showError={showError} />
           : <UnprotectedRoutes login={login} signup={signup} showError={showError} />}
       </Main>
     </>
   )
 }
 
-const ProtectedRoutes = () => {
+const ProtectedRoutes = ({ showError }) => {
   return (
     <Routes>
+      <Route path='upload' element={<Upload showError={showError} />} />
       <Route path='*' element={<h1>Soy el feed</h1>} />
     </Routes>
   )
