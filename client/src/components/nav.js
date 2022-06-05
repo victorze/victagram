@@ -1,5 +1,31 @@
 import { Link } from 'react-router-dom'
+import { Camera, Compass, Person } from 'react-bootstrap-icons';
 import styled from 'styled-components'
+
+export const Nav = ({ user }) => {
+  return (
+    <NavContainer>
+      <StyledNav>
+        <Logo to="/">
+          Victagram
+        </Logo>
+        {user &&
+          <LinksContainer>
+            <PageLink to='/upload'>
+              <Camera size={26}/>
+            </PageLink>
+            <PageLink to='/upload'>
+              <Compass size={26}/>
+            </PageLink>
+            <PageLink to='/upload'>
+              <Person size={26}/>
+            </PageLink>
+          </LinksContainer>
+        }
+      </StyledNav>
+    </NavContainer>
+  )
+}
 
 export const NavContainer = styled.div`
   border-bottom: 1px solid #DBDBDB;

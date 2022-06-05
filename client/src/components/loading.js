@@ -1,4 +1,14 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+
+export const Loading = () => {
+  return (
+    <StyledLoading>
+      <Dot1 />
+      <Dot2 />
+      <Dot />
+    </StyledLoading>
+  )
+}
 
 export const StyledLoading = styled.div`
   display: flex;

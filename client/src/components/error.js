@@ -1,4 +1,21 @@
-import styled from "styled-components";
+import styled from 'styled-components'
+
+export const Error = ({ message, hideError }) => {
+  if (!message) {
+    return null
+  }
+
+  return (
+    <StyledError>
+      <p>
+        {message}
+      </p>
+      <Close onClick={hideError}>
+        &times;
+      </Close>
+    </StyledError>
+  )
+}
 
 export const StyledError = styled.div`
   position: relative;

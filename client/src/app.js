@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import { Main } from './pages/styles'
 import { Loading } from './components/loading'
 import { Nav } from './components/nav'
 import { Error } from './components/error'
@@ -58,12 +57,12 @@ export const App = () => {
   return (
     <>
       {user && <Nav user={user} />}
-      <Main>
+      <main style={{maxWidth: '52.5rem', margin: '0 auto'}}>
         <Error message={errorMessage} hideError={hideError} />
         {user
           ? <ProtectedRoutes showError={showError} />
           : <UnprotectedRoutes login={login} signup={signup} showError={showError} />}
-      </Main>
+      </main>
     </>
   )
 }
