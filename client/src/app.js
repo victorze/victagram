@@ -60,14 +60,14 @@ export const App = () => {
       <main style={{maxWidth: '52.5rem', margin: '0 auto'}}>
         <Error message={errorMessage} hideError={hideError} />
         {user
-          ? <ProtectedRoutes showError={showError} />
-          : <UnprotectedRoutes login={login} signup={signup} showError={showError} />}
+          ? <PrivateRoutes showError={showError} />
+          : <PublicRoutes login={login} signup={signup} showError={showError} />}
       </main>
     </>
   )
 }
 
-const ProtectedRoutes = ({ showError }) => {
+const PrivateRoutes = ({ showError }) => {
   return (
     <Routes>
       <Route path='upload' element={<Upload showError={showError} />} />
@@ -77,7 +77,7 @@ const ProtectedRoutes = ({ showError }) => {
   )
 }
 
-const UnprotectedRoutes = ({ login, signup, showError }) => {
+const PublicRoutes = ({ login, signup, showError }) => {
   return (
     <Routes>
       <Route path='login' element={<Login login={login} showError={showError} />} />
