@@ -29,9 +29,9 @@ export const Dot = styled.div`
 `
 
 export const Dot1 = styled(Dot)`
-    animation-delay: -0.32s;
+  animation-delay: -0.32s;
 `
 
 export const Dot2 = styled(Dot)`
-    animation-delay: -0.16s;
+  animation-delay: -0.16s;
 `
