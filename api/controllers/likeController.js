@@ -13,7 +13,7 @@ const like = async (req, res) => {
   await post.save()
   logger.info(`El usuario '${req.user.username}' le dio like al post con id '${post.id}'`)
 
-  res.status(201).json()
+  res.status(204).json()
 }
 
 const unlike = async (req, res) => {
