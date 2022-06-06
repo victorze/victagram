@@ -18,7 +18,7 @@ const StyledAvatar = styled.div`
   align-items: center;
   border-bottom-width: 1px;
   border-bottom-color: ${(props) => props.theme.borderColor};
-  padding: 1rem;
+  padding: 0.5rem;
 `
 
 const ProfileLink = styled(Link)`
