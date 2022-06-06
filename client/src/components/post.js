@@ -43,7 +43,9 @@ export const Post = ({ post, showError, showAllComments = true }) => {
   return (
     <StyledPost>
       <Avatar user={author} />
-      <Image src={imageUrl} alt={caption} />
+      <ImageWrapper>
+        <Image src={imageUrl} alt={caption} />
+      </ImageWrapper>
       <Actions>
         <Like
           onClick={handleOnClickLike}
@@ -58,7 +60,7 @@ export const Post = ({ post, showError, showAllComments = true }) => {
           {caption}
         </CaptionContainer>
         {commentCount > 3 &&
-          <CommentsLink to={'/'}>
+          <CommentsLink to={`/post/${_id}/`}>
             Ver los {commentCount} comentarios
           </CommentsLink>
         }
@@ -102,11 +104,14 @@ const StyledPost = styled.div`
   overflow: hidden;
 `
 
+const ImageWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+
 const Image = styled.img`
-  display: block;
-  margin: 0 auto;
-  width: auto;
-  max-height: 25rem;
+  width: 100%;
+  height: auto;
 `
 
 const Actions = styled.div`
