@@ -20,7 +20,7 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  user: {
+  author: {
     type: ObjectId,
     required: true,
     ref: 'User',
@@ -39,7 +39,7 @@ const postSchema = new mongoose.Schema({
 })
 
 function autoPopulate(next) {
-  this.populate('user', '-hash -salt')
+  this.populate('author', '-hash -salt')
   this.populate([{
     path: 'comments',
     populate: { path: 'author' }

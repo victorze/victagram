@@ -3,7 +3,7 @@ const { catchErrors, saveImage, logger } = require('../handlers')
 
 const store = async (req, res) => {
   const { imageUrl, caption } = req.body
-  const post = await Post.create({ imageUrl, caption, user: req.user._id })
+  const post = await Post.create({ imageUrl, caption, author: req.user._id })
   logger.info('Nuevo post %s', post)
   res.status(201).json(post)
 }
@@ -38,7 +38,7 @@ const show = async (req, res) => {
 }
 
 const userPosts = async (req, res) => {
-  const posts = await Post.find({ user: req.params.id }).limit(24).sort('-createdAt')
+  const posts = await Post.find({ author: req.params.id }).limit(24).sort('-createdAt')
   res.json(posts)
 }
 
