@@ -1,14 +1,26 @@
 import { getToken } from './auth'
 
-const get = async (url) => {
+export const request = {}
+
+request.get = async (url) => {
   const response = await fetch(url, createOptions())
   response.data = await response.json()
   return buildResponse(response)
 }
 
-const post = async (url, body) => {
+request.post = async (url, body) => {
   const response = await fetch(url, createOptions('POST', body))
-  response.data = await response.json()
+  if (response.status !== 204) {
+    response.data = await response.json()
+  }
+  return buildResponse(response)
+}
+
+request.delete = async (url, body) => {
+  const response = await fetch(url, createOptions('DELETE', body))
+  if (response.status !== 204) {
+    response.data = await response.json()
+  }
   return buildResponse(response)
 }
 
@@ -43,9 +55,4 @@ const buildResponse = (response) => {
   }
 
   return response
-}
-
-export const request = {
-  get,
-  post,
 }
