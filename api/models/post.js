@@ -5,7 +5,7 @@ const commentSchema = new mongoose.Schema({
   author: {
     type: ObjectId,
     required: true,
-    ref: 'usuario',
+    ref: 'User',
   },
   message: {
     type: String,
@@ -38,6 +38,18 @@ const postSchema = new mongoose.Schema({
   toJSON: { virtuals: true },
 })
 
+function autoPopulate(next) {
+  this.populate('user', '-hash -salt')
+  this.populate([{
+    path: 'comments',
+    populate: { path: 'author' }
+  }])
+  next()
+}
+
+postSchema.pre('find', autoPopulate)
+postSchema.pre('findOne', autoPopulate)
+
 postSchema.virtual('commentCount').get(function () {
   return this.comments.length
 })
@@ -47,10 +59,10 @@ postSchema.virtual('likeCount').get(function () {
 })
 
 postSchema.virtual('hasLiked')
-  .get(function() {
+  .get(function () {
     return this._hasLiked || false
   })
-  .set(function(value) {
+  .set(function (value) {
     this._hasLiked = value
   })
 

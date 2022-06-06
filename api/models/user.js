@@ -44,14 +44,14 @@ userSchema.virtual('following', {
   count: true,
 })
 
-function autopopulate(next) {
+function autoPopulate(next) {
   this.populate('followers')
   this.populate('following')
   next()
 }
 
-userSchema.pre('find', autopopulate)
-userSchema.pre('findOne', autopopulate)
+userSchema.pre('find', autoPopulate)
+userSchema.pre('findOne', autoPopulate)
 
 userSchema.methods.secure = function (password) {
   const user = this.toObject()

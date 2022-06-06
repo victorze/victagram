@@ -23,7 +23,6 @@ const feed = async (req, res) => {
     user: followingIds,
     createdAt: { $lt: searchBefore },
   })
-    .populate('user', '_id username profileUrl')
     .limit(3)
     .sort('-createdAt')
 
