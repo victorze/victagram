@@ -1,6 +1,6 @@
-const { Post } = require("../models")
-const { catchErrors, logger } = require("../handlers")
-const { ConflictError } = require("./httpErrors")
+const { Post } = require('../models')
+const { catchErrors, logger } = require('../handlers')
+const { ConflictError } = require('./httpErrors')
 
 const like = async (req, res) => {
   const post = await Post.findById(req.params.id)

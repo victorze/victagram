@@ -1,4 +1,4 @@
-const { BadRequestError } = require("../../controllers/httpErrors")
+const { BadRequestError } = require('../../controllers/httpErrors')
 
 const validateSignup = (req, res, next) => {
   const { fullName, email, username, password } = req.body

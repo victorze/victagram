@@ -1,5 +1,5 @@
-const { Post } = require("../models")
-const { catchErrors, logger } = require("../handlers")
+const { Post } = require('../models')
+const { catchErrors, logger } = require('../handlers')
 
 const store = async (req, res) => {
   const { message } = req.body

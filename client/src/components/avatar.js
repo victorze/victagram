@@ -13,7 +13,7 @@ export const Avatar = ({ user }) => {
   )
 }
 
-export const AvatarImage = ( { user } ) => {
+export const AvatarImage = ({ user }) => {
   const style = {
     backgroundImage: user.profileUrl ? `url(${user.profileUrl})` : null,
     backgroundColor: stringToColor(user.username),

@@ -4,7 +4,7 @@ const { ConflictError, BadRequestError, NotFoundError } = require('./httpErrors'
 
 const signup = async (req, res) => {
   const { email, username } = req.body
-  const userExists = await User.findOne({$or: [{ email }, { username }]})
+  const userExists = await User.findOne({ $or: [{ email }, { username }] })
 
   if (userExists) {
     logger.warn(`Ya existe un usuario con el mismo email ${email} o username ${username}`)
@@ -48,7 +48,7 @@ const explore = async (req, res) => {
   const followingIds = following.map((friend) => friend.user)
   followingIds.push(req.user._id)
 
-  const users = await User.find({ _id: { $nin: followingIds }}).limit(20)
+  const users = await User.find({ _id: { $nin: followingIds } }).limit(20)
 
   res.json(users)
 }
@@ -62,7 +62,7 @@ const show = async (req, res) => {
     throw new NotFoundError(`No existe un usuario con username '${username}'`)
   }
 
-  user.viewerFollows = await Friendship.findOne({ user: user._id, follower: req.user._id}).count() > 0
+  user.viewerFollows = await Friendship.findOne({ user: user._id, follower: req.user._id }).count() > 0
 
   res.json(user)
 }

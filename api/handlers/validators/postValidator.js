@@ -1,4 +1,4 @@
-const { BadRequestError } = require("../../controllers/httpErrors")
+const { BadRequestError } = require('../../controllers/httpErrors')
 
 const validatePost = (req, res, next) => {
   const { imageUrl, caption } = req.body

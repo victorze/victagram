@@ -54,10 +54,10 @@ userSchema.pre('find', autoPopulate)
 userSchema.pre('findOne', autoPopulate)
 
 userSchema.virtual('viewerFollows')
-  .get(function() {
+  .get(function () {
     return this._siguiendo || false
   })
-  .set(function(value) {
+  .set(function (value) {
     this._siguiendo = value
   })
 

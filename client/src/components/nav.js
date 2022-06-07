@@ -12,13 +12,13 @@ export const Nav = ({ user }) => {
         {user &&
           <LinksContainer>
             <PageLink to='/upload'>
-              <Camera size={26}/>
+              <Camera size={26} />
             </PageLink>
             <PageLink to='/explore'>
-              <Compass size={26}/>
+              <Compass size={26} />
             </PageLink>
             <PageLink to={`/profile/${user.username}`}>
-              <Person size={26}/>
+              <Person size={26} />
             </PageLink>
           </LinksContainer>
         }

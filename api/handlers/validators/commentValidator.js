@@ -1,4 +1,4 @@
-const { BadRequestError } = require("../../controllers/httpErrors")
+const { BadRequestError } = require('../../controllers/httpErrors')
 
 const validateComment = (req, res, next) => {
   const { message } = req.body

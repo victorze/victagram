@@ -1,5 +1,5 @@
-const { Friendship } = require("../models")
-const { catchErrors, logger } = require("../handlers")
+const { Friendship } = require('../models')
+const { catchErrors, logger } = require('../handlers')
 
 const follow = async (req, res) => {
   const friendship = await Friendship.create({ user: req.params.id, follower: req.user.id })
