@@ -154,12 +154,18 @@ const UserSection = styled.section`
   display: flex;
   padding: 2.5rem;
   border-bottom: 1px solid ${(props) => props.theme.borderColor};
+  @media (max-width: 650px) {
+    flex-direction: column;
+  }
 `
 
 const ImageContainer = styled.div`
   width: 8rem;
   height: 8rem;
   margin: 0 3.5rem;
+  @media (max-width: 650px) {
+    margin-bottom: 1.5rem;;
+  }
 `
 
 const Image = styled.div`
