@@ -30,14 +30,14 @@ const userSchema = new mongoose.Schema({
   toJSON: { virtuals: true },
 })
 
-userSchema.virtual('followers', {
+userSchema.virtual('followerCount', {
   ref: 'Friendship',
   localField: '_id',
   foreignField: 'user',
   count: true,
 })
 
-userSchema.virtual('following', {
+userSchema.virtual('followingCount', {
   ref: 'Friendship',
   localField: '_id',
   foreignField: 'follower',
@@ -45,13 +45,21 @@ userSchema.virtual('following', {
 })
 
 function autoPopulate(next) {
-  this.populate('followers')
-  this.populate('following')
+  this.populate('followerCount')
+  this.populate('followingCount')
   next()
 }
 
 userSchema.pre('find', autoPopulate)
 userSchema.pre('findOne', autoPopulate)
+
+userSchema.virtual('viewerFollows')
+  .get(function() {
+    return this._siguiendo || false
+  })
+  .set(function(value) {
+    this._siguiendo = value
+  })
 
 userSchema.methods.secure = function (password) {
   const user = this.toObject()

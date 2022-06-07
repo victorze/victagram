@@ -62,6 +62,8 @@ const show = async (req, res) => {
     throw new NotFoundError(`No existe un usuario con username '${username}'`)
   }
 
+  user.viewerFollows = await Friendship.findOne({ user: user._id, follower: req.user._id}).count() > 0
+
   res.json(user)
 }
 
