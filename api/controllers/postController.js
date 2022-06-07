@@ -18,6 +18,7 @@ const feed = async (req, res) => {
   const searchBefore = req.query.date || new Date()
   const following = await Friendship.find({ follower: req.user.id })
   const followingIds = following.map((friend) => friend.user)
+  followingIds.push(req.user.id)
 
   const posts = await Post.find({
     author: followingIds,
