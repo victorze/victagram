@@ -8,6 +8,7 @@ import { Login } from './pages/auth/login'
 import { Signup } from './pages/auth/signup'
 import { Upload } from './pages/upload'
 import { Feed } from './pages/feed'
+import { Post } from './pages/post'
 
 export const App = () => {
   const [user, setUser] = useState(null)
@@ -71,6 +72,7 @@ const PrivateRoutes = ({ showError }) => {
   return (
     <Routes>
       <Route path='upload' element={<Upload showError={showError} />} />
+      <Route path='post/:id' element={<Post showError={showError} />} />
       <Route path='/' element={<Feed showError={showError} />} />
       <Route path='*' element={<h1>Soy el feed</h1>} />
     </Routes>
