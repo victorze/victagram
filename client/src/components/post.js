@@ -77,7 +77,7 @@ export const Post = ({ post, showError, showAllComments = true }) => {
   )
 }
 
-const Comments = ({ comments, show }) => {
+export const Comments = ({ comments, show }) => {
   return (
     <CommentsContainer>
       {comments

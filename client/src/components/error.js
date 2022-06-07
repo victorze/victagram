@@ -17,7 +17,7 @@ export const Error = ({ message, hideError }) => {
   )
 }
 
-export const StyledError = styled.div`
+const StyledError = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -31,7 +31,7 @@ export const StyledError = styled.div`
   color: #c53030;
 `
 
-export const Close = styled.button`
+const Close = styled.button`
   height: 1rem;
   border: none;
   padding: 0 0.2rem;

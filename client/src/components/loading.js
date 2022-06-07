@@ -10,7 +10,7 @@ export const Loading = () => {
   )
 }
 
-export const StyledLoading = styled.div`
+const StyledLoading = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,7 +19,7 @@ export const StyledLoading = styled.div`
   height: calc(100vh - 3.8rem);
 `
 
-export const Dot = styled.div`
+const Dot = styled.div`
   display: inline-block;
   width: 18px;
   height: 18px;
@@ -28,7 +28,7 @@ export const Dot = styled.div`
   animation: sk-bouncedelay 1.4s ease-in-out infinite both;
 `
 
-export const Dot1 = styled(Dot)`
+const Dot1 = styled(Dot)`
   animation-delay: -0.32s;
 `
 

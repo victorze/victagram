@@ -18,6 +18,7 @@ export const NewComment = ({ sendComment, showError }) => {
       .catch((error) => error.response && showError(error.response.data.message))
       .finally(() => {
         setSendingComment(false)
+        setButtonDisabled(true)
         setMessage('')
       })
   }
