@@ -20,7 +20,7 @@ const feed = async (req, res) => {
   const followingIds = following.map((friend) => friend.user)
 
   const posts = await Post.find({
-    user: followingIds,
+    author: followingIds,
     createdAt: { $lt: searchBefore },
   })
     .limit(3)
