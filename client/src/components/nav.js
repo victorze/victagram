@@ -7,7 +7,7 @@ export const Nav = ({ user }) => {
     <NavContainer>
       <StyledNav>
         <Logo to="/">
-          Victagram
+          Instagram
         </Logo>
         {user &&
           <LinksContainer>

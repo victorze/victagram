@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { StyledSignup, FormContainer, Form, Img, Title, Info, Input, Button, P, StyledLink } from './styles'
 import signupImage from '../../images/signup.png'
+import { useNavigate } from 'react-router-dom'
 
 export const Signup = ({ signup, showError }) => {
   const [user, setUser] = useState({
@@ -10,6 +11,7 @@ export const Signup = ({ signup, showError }) => {
     username: '',
     password: '',
   })
+  const navigate = useNavigate()
 
   const handleInputChange = ({ target }) => {
     setUser({
@@ -21,6 +23,7 @@ export const Signup = ({ signup, showError }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     signup(user)
+      .then(() => navigate('/'))
       .catch((error) => error.response && showError(error.response.data.message))
   }
 

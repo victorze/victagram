@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Button, Form, Input, P, StyledLink, Title } from './styles'
 import { StyledLogin } from './styles'
 
@@ -7,6 +8,7 @@ export const Login = ({ login, showError }) => {
     email: '',
     password: '',
   })
+  const navigate = useNavigate()
 
   const handleInputChange = ({ target }) => {
     setCredentials({
@@ -18,6 +20,7 @@ export const Login = ({ login, showError }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     login(credentials)
+      .then(() => navigate('/'))
       .catch((error) => error.response && showError(error.response.data.message))
   }
 

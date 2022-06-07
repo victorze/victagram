@@ -7,7 +7,7 @@ route.post('/signup', validateSignup, userController.signup)
 route.post('/login', validateLogin, userController.login)
 route.get('/whoami', auth, userController.whoami)
 route.get('/explore', auth, userController.explore)
-route.get('/:username', userController.show)
+route.get('/:username', auth, userController.show)
 route.post('/upload', [auth, validateImage], userController.upload)
 
 module.exports = route
