@@ -13,6 +13,15 @@ export const Avatar = ({ user }) => {
   )
 }
 
+export const AvatarImage = ( { user } ) => {
+  const style = {
+    backgroundImage: user.profileUrl ? `url(${user.profileUrl})` : null,
+    backgroundColor: stringToColor(user.username),
+  }
+
+  return <Image style={style} />
+}
+
 const StyledAvatar = styled.div`
   display: flex;
   align-items: center;
@@ -30,15 +39,6 @@ const UserName = styled.h2`
   color: ${(props) => props.theme.textColor};
   padding-left: 0.5rem;
 `
-
-export const AvatarImage = ( { user } ) => {
-  const style = {
-    backgroundImage: user.profileUrl ? `url(${user.profileUrl})` : null,
-    backgroundColor: stringToColor(user.username),
-  }
-
-  return <Image style={style} user={user} />
-}
 
 const Image = styled.div`
   width: 2.5rem;

@@ -30,7 +30,7 @@ export const Explore = ({ showError }) => {
   return (
     <StyledExplore>
       <People users={users} />
-      <Posts posts={posts} />
+      <Posts posts={posts} title={Explore} />
     </StyledExplore>
   )
 }
@@ -58,12 +58,14 @@ const People = ({ users }) => {
   )
 }
 
-const Posts = ({ posts }) => {
+export const Posts = ({ posts, title }) => {
   return (
     <StyledPosts>
-      <Title>
-        Explore
-      </Title>
+      {title &&
+        <Title>
+          Explore
+        </Title>
+      }
       <ImageContainer>
         {posts.map((post) =>
           <WrapperImage key={post._id} to={`/post/${post._id}/`}>

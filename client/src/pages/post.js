@@ -124,6 +124,7 @@ const LikeContainer = styled.div`
   display: flex;
   align-items: center;
   margin-left: 0.5rem;
+  margin-bottom: 0.1rem;
 `
 
 const LikeCount = styled.p`
