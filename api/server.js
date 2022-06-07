@@ -1,4 +1,5 @@
 require('dotenv').config()
+const path = require('path')
 const express = require('express')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
@@ -20,8 +21,12 @@ app.use(morgan('short', {
   }
 }))
 app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, '..', 'client', 'build')))
 
 app.use(require('./routes'))
+app.get(/[a-z0-9]*/, function(req, res, next) {
+  res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'))
+})
 
 app.use(notFound)
 app.use(productionErrors)
