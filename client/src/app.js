@@ -10,6 +10,8 @@ import { Upload } from './pages/upload'
 import { Feed } from './pages/feed'
 import { Post } from './pages/post'
 import { Explore } from './pages/explore'
+import { Profile } from './pages/profile'
+import { NotFound } from './components/notFound'
 
 export const App = () => {
   const [user, setUser] = useState(null)
@@ -59,24 +61,25 @@ export const App = () => {
   return (
     <>
       {user && <Nav user={user} />}
-      <main style={{maxWidth: '52.5rem', margin: '0 auto'}}>
+      <main style={{ maxWidth: '52.5rem', margin: '0 auto' }}>
         <Error message={errorMessage} hideError={hideError} />
         {user
-          ? <PrivateRoutes showError={showError} />
+          ? <PrivateRoutes user={user} logout={logout} showError={showError} />
           : <PublicRoutes login={login} signup={signup} showError={showError} />}
       </main>
     </>
   )
 }
 
-const PrivateRoutes = ({ showError }) => {
+const PrivateRoutes = ({ user, logout, showError }) => {
   return (
     <Routes>
-      <Route path='explore' element={<Explore showError={showError} />} />
-      <Route path='upload' element={<Upload showError={showError} />} />
-      <Route path='post/:id' element={<Post showError={showError} />} />
       <Route path='/' element={<Feed showError={showError} />} />
-      <Route path='*' element={<h1>Soy el feed</h1>} />
+      <Route path='upload' element={<Upload showError={showError} />} />
+      <Route path='explore' element={<Explore showError={showError} />} />
+      <Route path='post/:id' element={<Post showError={showError} />} />
+      <Route path='profile/:username' element={<Profile user={user} logout={logout} showError={showError} />} />
+      <Route path='*' element={<NotFound message="Error 404 Not Found" />} />
     </Routes>
   )
 }

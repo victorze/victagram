@@ -17,7 +17,7 @@ export const Nav = ({ user }) => {
             <PageLink to='/explore'>
               <Compass size={26}/>
             </PageLink>
-            <PageLink to='/upload'>
+            <PageLink to={`/profile/${user.username}`}>
               <Person size={26}/>
             </PageLink>
           </LinksContainer>
