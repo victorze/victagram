@@ -74,7 +74,6 @@ export const Post = ({ showError }) => {
         </LikeContainer>
         <NewComment sendComment={sendComment} showError={showError} />
       </Actions>
-      {console.log(post)}
     </StyledPost>
   )
 }

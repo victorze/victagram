@@ -133,8 +133,8 @@ const InputImage = styled.input`
 `
 
 const Img = styled.img`
-  width: auto;
-  height: 100%;
+  width: 100%;
+  height: auto;
 `
 
 const Caption = styled.textarea`

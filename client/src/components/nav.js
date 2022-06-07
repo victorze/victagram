@@ -14,7 +14,7 @@ export const Nav = ({ user }) => {
             <PageLink to='/upload'>
               <Camera size={26}/>
             </PageLink>
-            <PageLink to='/upload'>
+            <PageLink to='/explore'>
               <Compass size={26}/>
             </PageLink>
             <PageLink to='/upload'>
