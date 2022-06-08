@@ -32,12 +32,13 @@ export const NewComment = ({ sendComment, showError }) => {
   return (
     <StyledComment>
       <Form onSubmit={handleSendComment}>
-        <TextArea
+        <Input
           value={message}
           onChange={handleOnChange}
+          onKeyDown={(e) => e.keyCode !== 13 || e.preventDefault()}
           placeholder="Deja un comentario"
         >
-        </TextArea>
+        </Input>
         <Button disabled={buttonDisabled}>
           Post
         </Button>
@@ -56,7 +57,7 @@ const Form = styled.form`
   justify-content: space-between;
 `
 
-const TextArea = styled.textarea`
+const Input = styled.input`
   margin: 0.7rem 0;
   width: 100%;
   height: 1.125rem;
