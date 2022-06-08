@@ -49,6 +49,8 @@ export const Post = ({ showError }) => {
     return <NotFound message="El post que estás intentando ver no existe" />
   }
 
+  const captionToComment = {_id: 'x', message: post.caption, author: { username: post.author.username}}
+
   return (
     <StyledPost>
       <ImageWrapper>
@@ -60,8 +62,8 @@ export const Post = ({ showError }) => {
         </AvatarWrapper>
         <CommentsWrapper>
           <Comments
-            comments={post.comments}
-            show={post.comments.length}
+            comments={[captionToComment, ...post.comments]}
+            show={post.comments.length + 1}
           />
         </CommentsWrapper>
         <LikeContainer>

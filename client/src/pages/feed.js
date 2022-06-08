@@ -64,7 +64,7 @@ const EmptyFeed = () => {
   return (
     <StyledEmptyFeed>
       <MeesageEmptyFeed>
-        Tu feed está vacío por que no sigues a nadie, o porque no han publicado fotos.
+        Tu feed está vacío porque no sigues a nadie, o porque no han publicado fotos.
       </MeesageEmptyFeed>
       <ExploreLink to="/explore">Explora</ExploreLink>
     </StyledEmptyFeed>
