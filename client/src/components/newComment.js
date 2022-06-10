@@ -35,7 +35,7 @@ export const NewComment = ({ sendComment, showError }) => {
         <Input
           value={message}
           onChange={handleOnChange}
-          onKeyDown={(e) => e.keyCode !== 13 || e.preventDefault()}
+          onKeyDown={(e) => e.key !== 'Enter' || e.preventDefault()}
           placeholder="Deja un comentario"
         >
         </Input>
