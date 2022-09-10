@@ -4,22 +4,22 @@ https://user-images.githubusercontent.com/22132891/172541857-9d8db33c-8ac7-4bee-
 
 ## Configurar un entorno de desarrollo
 
+* Instalar dependencias del backend y frontend `yarn install`
+
 ### Backend
 
 * Verificar que el servidor MongoDB se encuentre activo y funcionando
 * Entrar en la carpeta del servidor web: `cd api`
 * Crear un archivo .env: `cp .env.example .env`
-* Instalar dependencias: `npm install`
-* Ejecutar el servidor: `npm run dev`
+* Ejecutar el servidor (desde la raiz del proyecto): `yarn workspace api dev`
 
 ### Frontend
 
 * Entrar en la carpeta del cliente: `cd client`
-* Instalar dependencias: `npm install`
-* Ejecutar el cliente: `npm start`
+* Ejecutar el cliente (desde la raiz del proyecto): `yarn workspace client start`
 
 ## Configurar un entorno de producción
 
 * Establecer las variables de entorno `MONGODB_URI` y `SECRET_JWT`
-* Compilar el frontend: `cd client && npm run build`
-* Ejecutar el servidor: `cd api && npm start`
+* Compilar el frontend: `yarn workspace client build`
+* Ejecutar el servidor: `yarn workspace api start`
