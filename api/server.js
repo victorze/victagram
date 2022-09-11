@@ -21,11 +21,11 @@ app.use(morgan('short', {
   }
 }))
 app.use(express.static('public'))
-app.use(express.static(path.join(__dirname, 'public', 'build')))
+app.use(express.static(path.join(__dirname, '..', 'client', 'build')))
 
 app.use(require('./routes'))
 app.get(/[a-z0-9]*/, function(req, res, next) {
-  res.sendFile(path.join(__dirname, 'public', 'build', 'index.html'))
+  res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'))
 })
 
 app.use(notFound)
