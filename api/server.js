@@ -24,7 +24,7 @@ app.use(express.static('public'))
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')))
 
 app.use(require('./routes'))
-app.get(/[a-z0-9]*/, function(req, res, next) {
+app.get(/[a-z0-9]*/, (req, res, next) => {
   res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'))
 })
 
