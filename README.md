@@ -1,6 +1,6 @@
 # Victagram
 
-https://user-images.githubusercontent.com/22132891/172541857-9d8db33c-8ac7-4bee-895a-731eb1de5593.mp4
+[victagram.webm](https://user-images.githubusercontent.com/22132891/193479132-6ecc6391-e190-417d-8c89-cd5be7ad08d0.webm)
 
 ## Configurar un entorno de desarrollo
 
