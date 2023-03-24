@@ -1,1 +1,6 @@
 node_modules
+.env
+combined.log
+error.log
+fun.js
+/public/build

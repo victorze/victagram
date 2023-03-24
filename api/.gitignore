@@ -1,8 +1,0 @@
-node_modules
-package-lock.json
-.env
-httpie
-combined.log
-error.log
-fun.js
-/public/build
