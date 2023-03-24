@@ -1,5 +1,5 @@
 import { Friendship } from '../models/index.js'
-import { logger } from '../handlers/index.js'
+import { logger } from '../utils/index.js'
 
 export const follow = async (req, res) => {
   const friendship = await Friendship.create({

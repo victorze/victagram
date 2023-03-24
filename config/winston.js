@@ -1,4 +1,5 @@
 import { createLogger, format, transports } from 'winston'
+import { env } from './index.js'
 
 export const logger = createLogger({
   format: format.combine(
@@ -19,7 +20,7 @@ export const logger = createLogger({
   ],
 })
 
-if (process.env.NODE_ENV !== 'production') {
+if (env.NODE_ENV !== 'production') {
   logger.clear().add(
     new transports.Console({
       level: 'debug',
@@ -33,6 +34,6 @@ if (process.env.NODE_ENV !== 'production') {
   )
 }
 
-if (process.env.NODE_ENV == 'test') {
+if (env.NODE_ENV == 'test') {
   logger.silent = true
 }

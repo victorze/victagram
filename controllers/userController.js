@@ -1,5 +1,5 @@
 import { User, Friendship } from '../models/index.js'
-import { saveImage, logger } from '../handlers/index.js'
+import { storage, logger } from '../utils/index.js'
 import { ConflictError, BadRequestError, NotFoundError } from './httpErrors.js'
 
 export const signup = async (req, res) => {
@@ -77,7 +77,7 @@ export const show = async (req, res) => {
 
 export const upload = async (req, res) => {
   const user = req.user
-  imageUrl = await saveImage(req.body, req.fileName)
+  imageUrl = await storage.saveImage(req.body, req.fileName)
   user.profileUrl = imageUrl
   await user.save()
   logger.info(

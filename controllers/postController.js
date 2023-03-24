@@ -1,5 +1,6 @@
 import { Post, Friendship } from '../models/index.js'
-import { saveImage, logger } from '../handlers/index.js'
+import { logger } from '../utils/index.js'
+import { storage } from '../utils/index.js'
 
 export const store = async (req, res) => {
   const { imageUrl, caption } = req.body
@@ -9,7 +10,7 @@ export const store = async (req, res) => {
 }
 
 export const upload = async (req, res) => {
-  const imageUrl = await saveImage(req.body, req.fileName)
+  const imageUrl = await storage.saveImage(req.body, req.fileName)
   logger.info(
     `El usuario '${req.user.username}' ha subido una imagen de post ${imageUrl}`
   )

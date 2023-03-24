@@ -1,5 +1,5 @@
 import { Post } from '../models/index.js'
-import { logger } from '../handlers/index.js'
+import { logger } from '../utils/index.js'
 
 export const store = async (req, res) => {
   const { message } = req.body

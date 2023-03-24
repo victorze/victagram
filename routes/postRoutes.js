@@ -9,8 +9,8 @@ import {
   id,
   validatePost,
   validateComment,
-} from '../handlers/validators/index.js'
-import { auth } from '../handlers/index.js'
+} from '../utils/validators/index.js'
+import { auth } from '../utils/middleware.js'
 const route = Router()
 
 route.post('/', [auth, validatePost], postController.store)

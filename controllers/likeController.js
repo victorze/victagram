@@ -1,5 +1,5 @@
 import { Post } from '../models/index.js'
-import { logger } from '../handlers/index.js'
+import { logger } from '../utils/index.js'
 import { ConflictError } from './httpErrors.js'
 
 export const like = async (req, res) => {
