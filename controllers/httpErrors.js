@@ -1,4 +1,4 @@
-class BadRequestError extends Error {
+export class BadRequestError extends Error {
   constructor(message) {
     super(message)
     this.message = message || 'Bad Request'
@@ -7,7 +7,7 @@ class BadRequestError extends Error {
   }
 }
 
-class UnauthorizedError extends Error {
+export class UnauthorizedError extends Error {
   constructor(message) {
     super(message)
     this.message = message || 'Unauthorized'
@@ -16,7 +16,7 @@ class UnauthorizedError extends Error {
   }
 }
 
-class NotFoundError extends Error {
+export class NotFoundError extends Error {
   constructor(message) {
     super(message)
     this.message = message || 'Not Found'
@@ -25,18 +25,11 @@ class NotFoundError extends Error {
   }
 }
 
-class ConflictError extends Error {
+export class ConflictError extends Error {
   constructor(message) {
     super(message)
     this.message = message || 'Conflict'
     this.status = 409
     this.name = 'ConflictError'
   }
-}
-
-module.exports = {
-  BadRequestError,
-  UnauthorizedError,
-  NotFoundError,
-  ConflictError,
 }

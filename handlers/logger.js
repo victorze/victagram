@@ -1,9 +1,9 @@
-const { createLogger, format, transports } = require('winston')
+import { createLogger, format, transports } from 'winston'
 
-const logger = createLogger({
+export const logger = createLogger({
   format: format.combine(
     format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-    format.splat(),
+    format.splat()
   ),
   transports: [
     new transports.File({
@@ -16,25 +16,23 @@ const logger = createLogger({
       level: 'error',
       format: format.json(),
     }),
-  ]
+  ],
 })
 
 if (process.env.NODE_ENV !== 'production') {
-  logger
-    .clear()
-    .add(new transports.Console({
+  logger.clear().add(
+    new transports.Console({
       level: 'debug',
       format: format.combine(
         format.colorize(),
-        format.printf(info => `${info.timestamp} ${info.level} ${info.message}`),
-      )
-    }))
+        format.printf(
+          (info) => `${info.timestamp} ${info.level} ${info.message}`
+        )
+      ),
+    })
+  )
 }
 
 if (process.env.NODE_ENV == 'test') {
   logger.silent = true
-}
-
-module.exports = {
-  logger
 }

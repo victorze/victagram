@@ -1,5 +1,3 @@
-module.exports = {
-  User: require('./user'),
-  Post: require('./post'),
-  Friendship: require('./friendship'),
-}
+export * from './user.js'
+export * from './friendship.js'
+export * from './post.js'

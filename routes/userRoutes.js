@@ -1,7 +1,12 @@
-const route = require('express').Router()
-const { userController } = require('../controllers')
-const { validateImage, validateLogin, validateSignup, } = require('../handlers/validators')
-const { auth } = require('../handlers')
+import { Router } from 'express'
+import { userController } from '../controllers/index.js'
+import {
+  validateImage,
+  validateLogin,
+  validateSignup,
+} from '../handlers/validators/index.js'
+import { auth } from '../handlers/index.js'
+const route = Router()
 
 route.post('/signup', validateSignup, userController.signup)
 route.post('/login', validateLogin, userController.login)
@@ -10,4 +15,4 @@ route.get('/explore', auth, userController.explore)
 route.get('/:username', auth, userController.show)
 route.post('/upload', [auth, validateImage], userController.upload)
 
-module.exports = route
+export default route

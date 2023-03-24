@@ -1,14 +1,15 @@
-const { logger } = require('./logger')
+import { logger } from './logger.js'
 
-const catchErrors = (fn) => (req, res, next) => fn(req, res, next).catch(next)
+export const catchErrors = (fn) => (req, res, next) =>
+  fn(req, res, next).catch(next)
 
-const notFound = (req, res, next) => {
+export const notFound = (req, res, next) => {
   const err = new Error('Aquí no hay nada interesante :(')
   err.status = 404
   next(err)
 }
 
-const productionErrors = (err, req, res, next) => {
+export const productionErrors = (err, req, res, next) => {
   const status = err.status || 500
 
   if (status == 500) {
@@ -22,10 +23,4 @@ const productionErrors = (err, req, res, next) => {
   }
 
   res.status(status).json({ message: err.message })
-}
-
-module.exports = {
-  catchErrors,
-  notFound,
-  productionErrors,
 }

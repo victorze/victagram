@@ -1,6 +1,6 @@
-const { BadRequestError } = require('../../controllers/httpErrors')
+import { BadRequestError } from '../../controllers/httpErrors.js'
 
-const validatePost = (req, res, next) => {
+export const validatePost = (req, res, next) => {
   const { imageUrl, caption } = req.body
 
   if (!imageUrl.trim()) {
@@ -16,8 +16,4 @@ const validatePost = (req, res, next) => {
   }
 
   next()
-}
-
-module.exports = {
-  validatePost,
 }

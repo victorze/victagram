@@ -1,6 +1,6 @@
-const { BadRequestError } = require('../../controllers/httpErrors')
+import { BadRequestError } from '../../controllers/httpErrors.js'
 
-const validateSignup = (req, res, next) => {
+export const validateSignup = (req, res, next) => {
   const { fullName, email, username, password } = req.body
 
   if (!fullName.trim()) {
@@ -12,7 +12,9 @@ const validateSignup = (req, res, next) => {
   }
 
   if (!/^[a-zA-Z0-9]+$/.test(username)) {
-    throw new BadRequestError('El nombre de usuario debe ser alfanúmerico y no debe contener espacios')
+    throw new BadRequestError(
+      'El nombre de usuario debe ser alfanúmerico y no debe contener espacios'
+    )
   }
 
   if (password.length < 6) {
@@ -22,7 +24,7 @@ const validateSignup = (req, res, next) => {
   next()
 }
 
-const validateLogin = (req, res, next) => {
+export const validateLogin = (req, res, next) => {
   const { email } = req.body
 
   if (!/(.+)@(.+){2,}\.(.+){2,}/.test(email)) {
@@ -30,9 +32,4 @@ const validateLogin = (req, res, next) => {
   }
 
   next()
-}
-
-module.exports = {
-  validateLogin,
-  validateSignup,
 }

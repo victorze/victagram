@@ -1,7 +1,5 @@
-module.exports = {
-  userController: require('./userController'),
-  postController: require('./postController'),
-  friendshipController: require('./friendshipController'),
-  commentController: require('./commentController'),
-  likeController: require('./likeController'),
-}
+export * as commentController from './commentController.js'
+export * as friendshipController from './friendshipController.js'
+export * as likeController from './likeController.js'
+export * as postController from './postController.js'
+export * as userController from './userController.js'

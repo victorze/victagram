@@ -1,11 +1,19 @@
-require('dotenv').config()
-const path = require('path')
-const express = require('express')
-const mongoose = require('mongoose')
-const morgan = require('morgan')
-const { notFound, productionErrors, logger } = require('./handlers')
+import * as dotenv from 'dotenv'
+dotenv.config()
+import path from 'path'
+import { fileURLToPath } from 'url'
+import express from 'express'
+import mongoose from 'mongoose'
+import morgan from 'morgan'
+import routes from './routes/index.js'
+import { notFound, productionErrors, logger } from './handlers/index.js'
 
-mongoose.connect(process.env.MONGODB_URI)
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+mongoose.set('strictQuery', false)
+mongoose
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected successfully to mongodb server'))
   .catch((err) => {
     console.error(`mongoose error → ${err.message}`)
@@ -15,15 +23,17 @@ mongoose.connect(process.env.MONGODB_URI)
 const app = express()
 app.use(express.json())
 app.use(express.raw({ type: 'image/*', limit: '5mb' }))
-app.use(morgan('short', {
-  stream: {
-    write: message => logger.info(message.trim())
-  }
-}))
+app.use(
+  morgan('short', {
+    stream: {
+      write: (message) => logger.info(message.trim()),
+    },
+  })
+)
 app.use(express.static('public'))
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')))
 
-app.use(require('./routes'))
+app.use('/', routes)
 app.get(/[a-z0-9]*/, (req, res, next) => {
   res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'))
 })

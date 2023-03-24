@@ -1,9 +1,9 @@
-const mongoose = require('mongoose')
-const { NotFoundError } = require('../../controllers/httpErrors')
+import mongoose from 'mongoose'
+import { NotFoundError } from '../../controllers/httpErrors.js'
 
 const ObjectId = mongoose.Types.ObjectId
 
-const id = (req, res, next) => {
+export const id = (req, res, next) => {
   const documentId = req.params.id
 
   if (documentId && !ObjectId.isValid(documentId)) {
@@ -11,8 +11,4 @@ const id = (req, res, next) => {
   }
 
   next()
-}
-
-module.exports = {
-  id,
 }

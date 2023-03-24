@@ -1,14 +1,18 @@
-const { User, Friendship } = require('../models')
-const { catchErrors, saveImage, logger } = require('../handlers')
-const { ConflictError, BadRequestError, NotFoundError } = require('./httpErrors')
+import { User, Friendship } from '../models/index.js'
+import { saveImage, logger } from '../handlers/index.js'
+import { ConflictError, BadRequestError, NotFoundError } from './httpErrors.js'
 
-const signup = async (req, res) => {
+export const signup = async (req, res) => {
   const { email, username } = req.body
   const userExists = await User.findOne({ $or: [{ email }, { username }] })
 
   if (userExists) {
-    logger.warn(`Ya existe un usuario con el mismo email ${email} o username ${username}`)
-    throw new ConflictError(`Ya existe un usuario con el mismo email o username`)
+    logger.warn(
+      `Ya existe un usuario con el mismo email ${email} o username ${username}`
+    )
+    throw new ConflictError(
+      `Ya existe un usuario con el mismo email o username`
+    )
   } else {
     let user = new User(req.body)
     user.setPassword(req.body.password)
@@ -21,7 +25,7 @@ const signup = async (req, res) => {
   }
 }
 
-const login = async (req, res) => {
+export const login = async (req, res) => {
   const { email, password } = req.body
   const user = await User.findOne({ email })
 
@@ -39,11 +43,11 @@ const login = async (req, res) => {
   }
 }
 
-const whoami = async (req, res) => {
+export const whoami = async (req, res) => {
   res.json(req.user.secure())
 }
 
-const explore = async (req, res) => {
+export const explore = async (req, res) => {
   const following = await Friendship.find({ follower: req.user.id })
   const followingIds = following.map((friend) => friend.user)
   followingIds.push(req.user._id)
@@ -53,7 +57,7 @@ const explore = async (req, res) => {
   res.json(users)
 }
 
-const show = async (req, res) => {
+export const show = async (req, res) => {
   const { username } = req.params
   const user = await User.findOne({ username }).select(['-hash', '-salt'])
 
@@ -62,26 +66,23 @@ const show = async (req, res) => {
     throw new NotFoundError(`No existe un usuario con username '${username}'`)
   }
 
-  user.viewerFollows = await Friendship.findOne({ user: user._id, follower: req.user._id }).count() > 0
+  user.viewerFollows =
+    (await Friendship.findOne({
+      user: user._id,
+      follower: req.user._id,
+    }).count()) > 0
 
   res.json(user)
 }
 
-const upload = async (req, res) => {
+export const upload = async (req, res) => {
   const user = req.user
   imageUrl = await saveImage(req.body, req.fileName)
   user.profileUrl = imageUrl
   await user.save()
-  logger.info(`El usuario '${user.username}' ha actualizado su imagen de perfil ${imageUrl}`)
+  logger.info(
+    `El usuario '${user.username}' ha actualizado su imagen de perfil ${imageUrl}`
+  )
 
   res.status(201).json({ url: imageUrl })
-}
-
-module.exports = {
-  signup: catchErrors(signup),
-  login: catchErrors(login),
-  whoami: catchErrors(whoami),
-  explore: catchErrors(explore),
-  show: catchErrors(show),
-  upload: catchErrors(upload),
 }
