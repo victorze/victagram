@@ -1,6 +1,6 @@
 import { BadRequestError } from '../../controllers/httpErrors.js'
 
-export const validatePost = (req, res, next) => {
+export const post = (req, res, next) => {
   const { imageUrl, caption } = req.body
 
   if (!imageUrl.trim()) {

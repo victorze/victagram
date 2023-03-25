@@ -1,7 +1,7 @@
 import { logger } from '../index.js'
 import { BadRequestError } from '../../controllers/httpErrors.js'
 
-export const validateImage = (req, res, next) => {
+export const image = (req, res, next) => {
   const validMimeTypes = ['image/jpeg', 'image/jpg', 'image/png']
   const contentType = req.header('content-type')
 

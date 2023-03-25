@@ -1,5 +1,0 @@
-export * from './commentValidator.js'
-export * from './imageValidator.js'
-export * from './idValidator.js'
-export * from './postValidator.js'
-export * from './userValidator.js'

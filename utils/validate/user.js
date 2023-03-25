@@ -1,6 +1,6 @@
 import { BadRequestError } from '../../controllers/httpErrors.js'
 
-export const validateSignup = (req, res, next) => {
+export const signup = (req, res, next) => {
   const { fullName, email, username, password } = req.body
 
   if (!fullName.trim()) {
@@ -24,7 +24,7 @@ export const validateSignup = (req, res, next) => {
   next()
 }
 
-export const validateLogin = (req, res, next) => {
+export const login = (req, res, next) => {
   const { email } = req.body
 
   if (!/(.+)@(.+){2,}\.(.+){2,}/.test(email)) {

@@ -20,7 +20,7 @@ export const logger = createLogger({
   ],
 })
 
-if (env.NODE_ENV !== 'production') {
+if (env.NODE_ENV == 'development') {
   logger.clear().add(
     new transports.Console({
       level: 'debug',

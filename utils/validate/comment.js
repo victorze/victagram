@@ -1,6 +1,6 @@
 import { BadRequestError } from '../../controllers/httpErrors.js'
 
-export const validateComment = (req, res, next) => {
+export const comment = (req, res, next) => {
   const { message } = req.body
 
   if (!message.trim()) {

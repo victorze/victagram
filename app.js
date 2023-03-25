@@ -12,7 +12,7 @@ app.use(express.static(path.join(env.BASE_DIR, 'frontend', 'dist')))
 
 app.use(middleware.requestLogger)
 
-app.use('/', routes)
+app.use('/api', routes)
 app.get(/[a-z0-9]*/, (_req, res) => {
   res.sendFile(path.join(env.BASE_DIR, 'frontend', 'dist', 'index.html'))
 })
