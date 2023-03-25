@@ -4,21 +4,24 @@
 
 ## Configurar un entorno de desarrollo
 
-* Instalar dependencias del backend y frontend `yarn install`
+Clonar el repositorio e instalar dependencias
 
-### Backend
+```bash
+git clone https://github.com/victorze/victagram.git
+cd victagram
+npm install
+cd frontend && npm install
+```
 
-* Verificar que el servidor MongoDB se encuentre activo y funcionando
-* Crear un archivo .env en la carpeta api: `cp api/.env.example api/.env`
-* Ejecutar el servidor (desde la raiz del proyecto): `yarn workspace api dev`
-
-### Frontend
-
-* Ejecutar el cliente (desde la raiz del proyecto): `yarn workspace client start`
+- Verificar que el servidor MongoDB se encuentre activo y funcionando
+- Crear un archivo .env: `cp .env.example .env`
+- Ejecutar el servidor: `npm run dev`
+- Ejecutar el cliente: `cd frontend && npm run dev`
 
 ## Configurar un entorno de producción
 
-* Establecer las variables de entorno `MONGODB_URI` y `SECRET_JWT`
-* Instalar dependencias: `yarn install`
-* Compilar el frontend: `yarn workspace client build`
-* Ejecutar el servidor: `yarn workspace api start`
+- Establecer las variables de entorno `MONGODB_URI` y `SECRET_JWT`
+- Instalar dependencias del cliente: `cd frontend && npm install`
+- Compilar el frontend: `cd frontend && npm run build`
+- Instalar dependencias del servidor: `npm install`
+- Ejecutar el servidor: `npm start`
